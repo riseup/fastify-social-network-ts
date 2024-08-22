@@ -5,6 +5,8 @@ import { User } from "./user";
 import { Like } from "./like";
 import { Comment } from "./comment";
 import { Follow } from "./follow";
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export const AppDataSource = new DataSource({
   type: "postgres",

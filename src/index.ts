@@ -1,6 +1,4 @@
 import bcrypt from "bcrypt";
-import * as dotenv from 'dotenv';
-dotenv.config();
 
 import { AppDataSource } from "./entity/data-source";
 import { User } from "./entity/user";
