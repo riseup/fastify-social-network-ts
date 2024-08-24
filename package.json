@@ -1,5 +1,6 @@
 {
-  "name": "fastify-social-network-ts",
+  "name": "social-network-api",
+  "description": "Social network API",
   "version": "0.3.0",
   "main": "index.js",
   "license": "MIT",
@@ -16,15 +17,22 @@
     "db:down": "docker-compose -f docker/docker-compose.yml down && docker volume rm docker_postgres_data",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "db:migrations": "npm run typeorm migration:run -- -d src/entity/data-source.ts",
-    "db:generate": "npm run typeorm migration:generate src/migration/initial -- -d src/entity/data-source.ts"
+    "db:generate": "npm run typeorm migration:generate src/migration/initial -- -d src/entity/data-source.ts",
+    "openapi": "ts-node -r tsconfig-paths/register static/openapi.ts"
   },
   "dependencies": {
+    "@fastify/cookie": "^9.4.0",
+    "@fastify/cors": "^9.0.1",
+    "@fastify/helmet": "^11.1.1",
+    "@fastify/jwt": "^8.0.1",
+    "@fastify/rate-limit": "^9.1.0",
+    "@fastify/swagger": "^8.15.0",
     "bcrypt": "^5.1.1",
+    "class-validator": "^0.14.1",
+    "fastify": "^4.28.1",
     "pg": "^8.12.0",
-    "pino": "^9.3.2",
     "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.20",
-    "zod": "^3.23.8"
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
