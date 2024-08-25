@@ -13,12 +13,13 @@
     "clean": "rimraf dist",
     "dev": "ts-node-dev src/index.ts --respawn",
     "test": "jest",
-    "db:up": "docker-compose --env-file .env -f docker/docker-compose.yml up -d",
-    "db:down": "docker-compose -f docker/docker-compose.yml down && docker volume rm docker_postgres_data",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "db:migrations": "npm run typeorm migration:run -- -d src/entity/data-source.ts",
+    "openapi": "ts-node static/openapi.ts",
     "db:generate": "npm run typeorm migration:generate src/migration/initial -- -d src/entity/data-source.ts",
-    "openapi": "ts-node -r tsconfig-paths/register static/openapi.ts"
+    "db:migration": "npm run typeorm migration:run -- -d src/entity/data-source.ts",
+    "db:seed": "ts-node src/seed/seed.ts",
+    "db:up": "docker-compose --env-file .env -f docker/docker-compose.yml up -d",
+    "db:down": "docker-compose -f docker/docker-compose.yml down && docker volume rm docker_postgres_data"
   },
   "dependencies": {
     "@fastify/cookie": "^9.4.0",

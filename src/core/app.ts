@@ -1,6 +1,5 @@
-import Fastify, { FastifyInstance, FastifyReply, FastifyRequest } from 'fastify';
-import fastifyJwt, { JWT } from '@fastify/jwt';
-// import fastifySwagger from '@fastify/swagger';
+import Fastify, { FastifyInstance } from 'fastify';
+import { JWT } from '@fastify/jwt';
 import fastifyCors from '@fastify/cors';
 import fastifyHelmet from '@fastify/helmet';
 import fastifyRateLimit from '@fastify/rate-limit';
@@ -33,7 +32,6 @@ export async function app() {
   
   authenticate(server)
   openapi(server)
-  // server.register(fastifySwagger);
 
   server.setErrorHandler(errorHandler);
   server.setNotFoundHandler(notFoundHandler);
