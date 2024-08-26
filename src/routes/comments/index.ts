@@ -37,7 +37,11 @@ async function comments(fastify: FastifyInstance) {
       reply.code(500).send({ message: 'Internal Server Error' });
     }
   }
-  fastify.post('/:postId/comment', { schema: commentSchema, preValidation: [fastify.authenticate] }, handler);
+
+  fastify.post('/:postId/comment', {
+    schema: commentSchema,
+    preValidation: [fastify.authenticate]
+  }, handler);
 }
 
 export default comments

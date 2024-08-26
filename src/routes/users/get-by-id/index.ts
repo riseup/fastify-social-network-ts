@@ -23,6 +23,8 @@ async function getUser(fastify: FastifyInstance) {
     }
   }
   
-  fastify.get('/:id', { schema: userSchema }, handler);
+  fastify.get('/:id', { 
+    schema: userSchema
+   }, handler);
 }
 export default getUser

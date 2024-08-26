@@ -31,7 +31,10 @@ async function follow(fastify: FastifyInstance) {
       reply.code(500).send({ message: 'Internal Server Error' });
     }
   }
-  fastify.post('/:id/follow', { schema: followSchema, preValidation: [fastify.authenticate] }, handler);
+  fastify.post('/:id/follow', {
+    schema: followSchema,
+    preValidation: [fastify.authenticate]
+  }, handler);
 }
 
 export default follow

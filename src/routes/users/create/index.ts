@@ -33,7 +33,9 @@ async function userCreateUser(server: FastifyInstance) {
     }
   }
 
-  server.post('/', { schema: userSchema }, handler);
+  server.post('/', {
+    schema: userSchema
+  }, handler);
 }
 
 export default userCreateUser

@@ -24,7 +24,10 @@ async function getPost(fastify: FastifyInstance) {
     }
   }
 
-  fastify.get('/:id', { schema: getPostSchema, preValidation: [fastify.authenticate] }, handler);
+  fastify.get('/:id', {
+    schema: getPostSchema,
+    preValidation: [fastify.authenticate]
+  }, handler);
 }
 
 export default getPost

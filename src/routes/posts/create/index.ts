@@ -29,7 +29,10 @@ async function createPost(fastify: FastifyInstance) {
     }
   }
 
-  fastify.post('/', { schema: postSchema, preValidation: [fastify.authenticate] },  handler);
+  fastify.post('/', {
+    schema: postSchema,
+    preValidation: [fastify.authenticate]
+  }, handler);
 }
 
 export default createPost

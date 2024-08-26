@@ -1,5 +1,4 @@
 import Fastify, { FastifyInstance } from 'fastify';
-import { JWT } from '@fastify/jwt';
 import fastifyCors from '@fastify/cors';
 import fastifyHelmet from '@fastify/helmet';
 import fastifyRateLimit from '@fastify/rate-limit';
@@ -9,15 +8,11 @@ import { DataSource } from 'typeorm';
 import { Config, config } from '../config';
 import { AppDataSource } from '../entity/data-source';
 import { authenticate, notFoundHandler, errorHandler, openapi } from '../utils';
-
 import routes from '../routes';
 
 declare module 'fastify' {
-  interface FastifyRequest {
-    jwt: JWT;
-  }
+
   export interface FastifyInstance {
-    authenticate: any;
     dataSource: DataSource;
     config: Config
   }

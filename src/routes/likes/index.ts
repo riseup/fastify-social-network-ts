@@ -35,8 +35,11 @@ async function likes(fastify: FastifyInstance) {
       reply.code(500).send({ message: 'Internal Server Error' });
     }
   }
-  
-  fastify.post('/:postId/like', { schema: likeSchema, preValidation: [fastify.authenticate] }, handler);
+
+  fastify.post('/:postId/like', {
+    schema: likeSchema,
+    preValidation: [fastify.authenticate]
+  }, handler);
 }
 
 export default likes

@@ -18,7 +18,9 @@ async function getAllPosts(fastify: FastifyInstance) {
     }
   }
 
-  fastify.get('/', { schema: getAllPostsSchema }, handler);
+  fastify.get('/', {
+    schema: getAllPostsSchema
+  }, handler);
 }
 
 

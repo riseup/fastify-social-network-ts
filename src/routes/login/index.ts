@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt';
 import { authSchema } from './schema';
 
 async function login(fastify: FastifyInstance) {
-  
+
   const handler = async (
-    request: FastifyRequest<{ Body: { email: string; password: string } }>, 
+    request: FastifyRequest<{ Body: { email: string; password: string } }>,
     reply: FastifyReply
   ) => {
     const userRepository = fastify.dataSource.getRepository(User);
@@ -30,7 +30,9 @@ async function login(fastify: FastifyInstance) {
     }
   }
 
-  fastify.post('/', { schema: authSchema }, handler);
+  fastify.post('/', {
+    schema: authSchema
+  }, handler);
 }
 
 export default login

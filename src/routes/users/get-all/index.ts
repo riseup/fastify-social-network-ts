@@ -30,7 +30,9 @@ async function getAllUsers(fastify: FastifyInstance) {
     }
   }
 
-  fastify.get('/', { schema: schema }, handler);
+  fastify.get('/', {
+    schema: schema
+  }, handler);
 }
 
 export default getAllUsers

@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "social-network-api",
-    "description": "Social network API API - rev master_96c2bc6",
+    "description": "Social network API API - rev master_7e5620c",
     "version": "0.3.0"
   },
   "components": {

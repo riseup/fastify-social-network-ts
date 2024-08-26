@@ -31,7 +31,10 @@ async function unfollow(fastify: FastifyInstance) {
       reply.code(500).send({ message: 'Internal Server Error' });
     }
   }
-  fastify.post('/:id/unfollow', { schema: unfollowSchema, preValidation: [fastify.authenticate] }, handler);
+  fastify.post('/:id/unfollow', {
+    schema: unfollowSchema,
+    preValidation: [fastify.authenticate]
+  }, handler);
 }
 
 export default unfollow
