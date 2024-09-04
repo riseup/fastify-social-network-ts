@@ -3,10 +3,12 @@ import { User } from './../../../entity/user';
 import { EntityManager } from 'typeorm';
 import { unfollowSchema } from './schema';
 
-async function unfollow(fastify: FastifyInstance) {
-
-  const handler = async (request: FastifyRequest<{ Params: { id: number } }>, reply: FastifyReply) => {
-    const entityManager: EntityManager = fastify.dataSource.manager;
+async function unfollow(server: FastifyInstance) {
+  const handler = async (
+    request: FastifyRequest<{ Params: { id: number } }>,
+    reply: FastifyReply
+  ) => {
+    const entityManager: EntityManager = server.dataSource.manager;
 
     try {
       const userId = request.params.id;
@@ -30,11 +32,15 @@ async function unfollow(fastify: FastifyInstance) {
       request.log.error(error);
       reply.code(500).send({ message: 'Internal Server Error' });
     }
-  }
-  fastify.post('/:id/unfollow', {
-    schema: unfollowSchema,
-    preValidation: [fastify.authenticate]
-  }, handler);
+  };
+  server.post(
+    '/:id/unfollow',
+    {
+      schema: unfollowSchema,
+      preValidation: [server.authenticate]
+    },
+    handler
+  );
 }
 
-export default unfollow
+export default unfollow;

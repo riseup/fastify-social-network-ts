@@ -1,4 +1,3 @@
-
 export const followSchema = {
   description: 'Follow a user',
   tags: ['Followers'],

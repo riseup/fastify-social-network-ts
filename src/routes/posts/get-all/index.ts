@@ -3,10 +3,9 @@ import { Post } from './../../../entity/post';
 import { EntityManager } from 'typeorm';
 import { getAllPostsSchema } from './schema';
 
-async function getAllPosts(fastify: FastifyInstance) {
-
+async function getAllPosts(server: FastifyInstance) {
   const handler = async (request: FastifyRequest, reply: FastifyReply) => {
-    const entityManager: EntityManager = fastify.dataSource.manager;
+    const entityManager: EntityManager = server.dataSource.manager;
 
     try {
       // Obtener todos los posts
@@ -16,12 +15,15 @@ async function getAllPosts(fastify: FastifyInstance) {
       request.log.error(error);
       reply.code(500).send({ message: 'Internal Server Error' });
     }
-  }
+  };
 
-  fastify.get('/', {
-    schema: getAllPostsSchema
-  }, handler);
+  server.get(
+    '/',
+    {
+      schema: getAllPostsSchema
+    },
+    handler
+  );
 }
 
-
-export default getAllPosts
+export default getAllPosts;

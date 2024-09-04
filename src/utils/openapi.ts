@@ -38,5 +38,5 @@ export const openapi = async (server: FastifyInstance) => {
         description: 'Find more info here'
       }
     }
-  })
-}
+  });
+};

@@ -9,7 +9,7 @@ export class User {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({type: 'varchar', length: 255})
+  @Column({ type: 'varchar', length: 255 })
   name!: string;
 
   @Column({ unique: true, type: 'varchar', length: 255 })
@@ -18,18 +18,18 @@ export class User {
   @Column({ type: 'varchar', length: 255 })
   password!: string;
 
-  @OneToMany(() => Post, post => post.user)
+  @OneToMany(() => Post, (post) => post.user)
   posts!: Post[];
 
-  @OneToMany(() => Follow, follow => follow.follower)
-  following!: Follow[];
-
-  @OneToMany(() => Follow, follow => follow.followed)
-  followers!: Follow[];
-
-  @OneToMany(() => Like, like => like.user)
+  @OneToMany(() => Like, (like) => like.user)
   likes!: Like[];
 
-  @OneToMany(() => Comment, comment => comment.user)
+  @OneToMany(() => Follow, (follow) => follow.followed)
+  followers!: Follow[];
+
+  @OneToMany(() => Follow, (follow) => follow.follower)
+  following!: Follow[];
+
+  @OneToMany(() => Comment, (comment) => comment.user)
   comments!: Comment[];
 }

@@ -17,9 +17,9 @@ async function versionRoute(server: FastifyInstance) {
       request.log.error(error);
       reply.code(500).send({ message: 'Internal Server Error' });
     }
-  }
+  };
 
-  server.get('/version', { schema: versionSchema }, handler);
+  server.get('/', { schema: versionSchema }, handler);
 }
 
 export default versionRoute;

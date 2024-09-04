@@ -12,9 +12,9 @@ export class Follow {
   @CreateDateColumn()
   follow_date!: Date;
 
-  @ManyToOne(() => User, user => user.following)
+  @ManyToOne(() => User, (user) => user.following)
   follower!: User;
 
-  @ManyToOne(() => User, user => user.followers)
+  @ManyToOne(() => User, (user) => user.followers)
   followed!: User;
 }

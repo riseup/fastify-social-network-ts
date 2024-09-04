@@ -2,14 +2,16 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { User } from './../../../entity/user';
 import { userSchema } from './schema';
 
-async function getUser(fastify: FastifyInstance) {
-
+async function getUser(server: FastifyInstance) {
   const handler = async (
     request: FastifyRequest<{ Params: { id: number } }>,
-    reply: FastifyReply) => {
+    reply: FastifyReply
+  ) => {
     try {
-      const userRepository = fastify.dataSource.getRepository(User);
-      const user = await userRepository.findOne({ where: { id: request.params.id } });
+      const userRepository = server.dataSource.getRepository(User);
+      const user = await userRepository.findOne({
+        where: { id: request.params.id }
+      });
 
       if (!user) {
         reply.code(404).send({ message: 'User not found' });
@@ -21,10 +23,14 @@ async function getUser(fastify: FastifyInstance) {
       request.log.error(error);
       reply.code(500).send({ message: 'Internal Server Error' });
     }
-  }
-  
-  fastify.get('/:id', { 
-    schema: userSchema
-   }, handler);
+  };
+
+  server.get(
+    '/:id',
+    {
+      schema: userSchema
+    },
+    handler
+  );
 }
-export default getUser
+export default getUser;

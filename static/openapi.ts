@@ -27,14 +27,14 @@ async function main(): Promise<void> {
     await fs.writeFile(path.join(__dirname, 'revision.json'), JSON.stringify(revision));
 
     // Iniciar la aplicación Fastify
-    const fastify = await app();
-    await fastify.ready();
+    const server = await app();
+    await server.ready();
 
     // Escribir la especificación OpenAPI en un archivo JSON
-    await fs.writeFile(path.join(__dirname, 'openapi.json'), JSON.stringify(fastify.swagger(), null, 2));
+    await fs.writeFile(path.join(__dirname, 'openapi.json'), JSON.stringify(server.swagger(), null, 2));
 
     // Cerrar la aplicación Fastify
-    await fastify.close();
+    await server.close();
   } catch (error) {
     console.error('Error:', error);
     process.exit(2);

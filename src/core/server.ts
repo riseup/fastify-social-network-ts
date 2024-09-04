@@ -1,14 +1,16 @@
 import { app } from './app';
 
 export const start = async () => {
-  const fastify = await app();
+  const server = await app();
   try {
-    await fastify.ready();
-    console.log(JSON.stringify(fastify.swagger(), null, 2));
-    await fastify.listen({ port: 3000 });
-    console.log(`Server listening on port 3000`);
+    await server.listen({
+      port: Number(process.env.PORT) || 3000,
+      host: '0.0.0.0'
+    });
+    await server.ready();
+    console.log(`Server listening on: ${JSON.stringify(server.server.address() as object)}`);
   } catch (err) {
-    fastify.log.error(err);
+    server.log.error(err);
     process.exit(1);
   }
 };

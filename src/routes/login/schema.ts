@@ -5,37 +5,38 @@ export const authSchema = {
     type: 'object',
     properties: {
       email: { type: 'string', format: 'email' },
-      password: { type: 'string', minLength: 6 },
+      password: { type: 'string', minLength: 6 }
     },
     required: ['email', 'password'],
+    additionalProperties: false
   },
   response: {
     200: {
       type: 'object',
       properties: {
-        token: { type: 'string' },
+        token: { type: 'string' }
       },
       example: {
-        token: 'your.jwt.token.here',
-      },
+        token: 'your.jwt.token.here'
+      }
     },
     401: {
       type: 'object',
       properties: {
-        message: { type: 'string' },
+        message: { type: 'string' }
       },
       example: {
-        message: 'Invalid email or password',
-      },
+        message: 'Invalid email or password'
+      }
     },
     500: {
       type: 'object',
       properties: {
-        message: { type: 'string' },
+        message: { type: 'string' }
       },
       example: {
-        message: 'Internal Server Error',
-      },
-    },
-  },
+        message: 'Internal Server Error'
+      }
+    }
+  }
 };

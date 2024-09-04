@@ -6,4 +6,4 @@ export default {
   createPost,
   getAllPosts,
   getPost
-}
+};

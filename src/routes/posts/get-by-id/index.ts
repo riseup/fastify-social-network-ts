@@ -3,10 +3,12 @@ import { Post } from './../../../entity/post';
 import { EntityManager } from 'typeorm';
 import { getPostSchema } from './schema';
 
-async function getPost(fastify: FastifyInstance) {
-
-  const handler = async (request: FastifyRequest<{ Params: { id: number } }>, reply: FastifyReply) => {
-    const entityManager: EntityManager = fastify.dataSource.manager;
+async function getPost(server: FastifyInstance) {
+  const handler = async (
+    request: FastifyRequest<{ Params: { id: number } }>,
+    reply: FastifyReply
+  ) => {
+    const entityManager: EntityManager = server.dataSource.manager;
 
     try {
       const postId = request.params.id;
@@ -22,12 +24,16 @@ async function getPost(fastify: FastifyInstance) {
       request.log.error(error);
       reply.code(500).send({ message: 'Internal Server Error' });
     }
-  }
+  };
 
-  fastify.get('/:id', {
-    schema: getPostSchema,
-    preValidation: [fastify.authenticate]
-  }, handler);
+  server.get(
+    '/:id',
+    {
+      schema: getPostSchema,
+      preValidation: [server.authenticate]
+    },
+    handler
+  );
 }
 
-export default getPost
+export default getPost;

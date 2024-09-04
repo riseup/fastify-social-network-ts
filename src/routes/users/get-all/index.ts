@@ -3,12 +3,16 @@ import { User } from '../../../entity/user';
 import { FindManyOptions } from 'typeorm';
 import { schema } from './schema';
 
-async function getAllUsers(fastify: FastifyInstance) {
-
-  const handler = async (request: FastifyRequest<{ Querystring: { page?: number, limit?: number, fields?: string } }>, reply: FastifyReply) => {
+async function getAllUsers(server: FastifyInstance) {
+  const handler = async (
+    request: FastifyRequest<{
+      Querystring: { page?: number; limit?: number; fields?: string };
+    }>,
+    reply: FastifyReply
+  ) => {
     try {
       const { page = 1, limit = 10, fields } = request.query;
-      const userRepository = fastify.dataSource.getRepository(User);
+      const userRepository = server.dataSource.getRepository(User);
 
       const options: FindManyOptions<User> = {
         skip: (page - 1) * limit,
@@ -16,10 +20,13 @@ async function getAllUsers(fastify: FastifyInstance) {
       };
 
       if (fields) {
-        options.select = fields.split(',').reduce((acc, field) => {
-          acc[field.trim() as keyof User] = true;
-          return acc;
-        }, {} as Partial<Record<keyof User, boolean>>);
+        options.select = fields.split(',').reduce(
+          (acc, field) => {
+            acc[field.trim() as keyof User] = true;
+            return acc;
+          },
+          {} as Partial<Record<keyof User, boolean>>
+        );
       }
 
       const users = await userRepository.find(options);
@@ -28,11 +35,15 @@ async function getAllUsers(fastify: FastifyInstance) {
       request.log.error(error);
       reply.code(500).send({ message: 'Internal Server Error' });
     }
-  }
+  };
 
-  fastify.get('/', {
-    schema: schema
-  }, handler);
+  server.get(
+    '/',
+    {
+      schema: schema
+    },
+    handler
+  );
 }
 
-export default getAllUsers
+export default getAllUsers;

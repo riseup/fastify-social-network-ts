@@ -5,10 +5,12 @@ import { validate } from 'class-validator';
 import { userSchema } from './schema';
 
 async function userCreateUser(server: FastifyInstance) {
-
   const handler = async (
-    request: FastifyRequest<{ Body: { name: string, email: string, password: string } }>,
-    reply: FastifyReply) => {
+    request: FastifyRequest<{
+      Body: { name: string; email: string; password: string };
+    }>,
+    reply: FastifyReply
+  ) => {
     try {
       const userRepository = server.dataSource.getRepository(User);
       const hashedPassword = await bcrypt.hash(request.body.password, 10);
@@ -31,11 +33,15 @@ async function userCreateUser(server: FastifyInstance) {
       request.log.error(error);
       reply.code(500).send({ message: 'Internal Server Error' });
     }
-  }
+  };
 
-  server.post('/', {
-    schema: userSchema
-  }, handler);
+  server.post(
+    '/',
+    {
+      schema: userSchema
+    },
+    handler
+  );
 }
 
-export default userCreateUser
+export default userCreateUser;

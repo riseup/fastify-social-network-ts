@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  CreateDateColumn
+} from 'typeorm';
 import { User } from './user';
 import { Like } from './like';
 import { Comment } from './comment';
@@ -8,18 +15,18 @@ export class Post {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column({type: 'text'})
-  content: string = ''
+  @Column({ type: 'text' })
+  content: string = '';
 
   @CreateDateColumn()
   post_date!: Date;
 
-  @ManyToOne(() => User, user => user.posts)
+  @ManyToOne(() => User, (user) => user.posts)
   user!: User;
 
-  @OneToMany(() => Like, like => like.post)
+  @OneToMany(() => Like, (like) => like.post)
   likes!: Like[];
 
-  @OneToMany(() => Comment, comment => comment.post)
+  @OneToMany(() => Comment, (comment) => comment.post)
   comments!: Comment[];
 }

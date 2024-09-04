@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import { AppDataSource } from '../entity/data-source';
+import { getDataSourceConfig } from '../entity/data-source';
 import { User } from '../entity/user';
 import { Post } from '../entity/post';
 import { Comment } from '../entity/comment';
@@ -7,6 +7,7 @@ import { Like } from '../entity/like';
 import { Follow } from '../entity/follow';
 
 async function seed() {
+  const AppDataSource = getDataSourceConfig();
   await AppDataSource.initialize();
 
   const userRepository = AppDataSource.getRepository(User);
@@ -42,7 +43,7 @@ async function seed() {
   for (let i = 1; i <= 10; i++) {
     const comment = new Comment();
     comment.content = `This is a comment on post number ${i}`;
-    comment.user = users[(i % 10)];
+    comment.user = users[i % 10];
     comment.post = posts[i - 1];
     await commentRepository.save(comment);
     comments.push(comment);
@@ -52,7 +53,7 @@ async function seed() {
   const likes = [];
   for (let i = 1; i <= 10; i++) {
     const like = new Like();
-    like.user = users[(i % 10)];
+    like.user = users[i % 10];
     like.post = posts[i - 1];
     await likeRepository.save(like);
     likes.push(like);
@@ -63,7 +64,7 @@ async function seed() {
   for (let i = 1; i <= 10; i++) {
     const follow = new Follow();
     follow.follower = users[i - 1];
-    follow.followed = users[(i % 10)];
+    follow.followed = users[i % 10];
     await followRepository.save(follow);
     follows.push(follow);
   }
@@ -72,4 +73,4 @@ async function seed() {
   await AppDataSource.destroy();
 }
 
-seed().catch(error => console.error(error));
+seed().catch((error) => console.error(error));

@@ -1,36 +1,35 @@
-
 export const unfollowSchema = {
   description: 'Unfollow a user',
   tags: ['Followers'],
   params: {
     type: 'object',
     properties: {
-      id: { type: 'number' },
+      id: { type: 'number' }
     },
-    required: ['id'],
+    required: ['id']
   },
   response: {
     204: {
       type: 'object',
-      description: 'No Content',
+      description: 'No Content'
     },
     404: {
       type: 'object',
       properties: {
-        message: { type: 'string' },
+        message: { type: 'string' }
       },
       example: {
-        message: 'User not found',
-      },
+        message: 'User not found'
+      }
     },
     500: {
       type: 'object',
       properties: {
-        message: { type: 'string' },
+        message: { type: 'string' }
       },
       example: {
-        message: 'Internal Server Error',
-      },
-    },
-  },
+        message: 'Internal Server Error'
+      }
+    }
+  }
 };

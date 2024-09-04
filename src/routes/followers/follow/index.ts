@@ -3,10 +3,12 @@ import { User } from './../../../entity/user';
 import { EntityManager } from 'typeorm';
 import { followSchema } from './schema';
 
-async function follow(fastify: FastifyInstance) {
-
-  const handler = async (request: FastifyRequest<{ Params: { id: number } }>, reply: FastifyReply) => {
-    const entityManager: EntityManager = fastify.dataSource.manager;
+async function follow(server: FastifyInstance) {
+  const handler = async (
+    request: FastifyRequest<{ Params: { id: number } }>,
+    reply: FastifyReply
+  ) => {
+    const entityManager: EntityManager = server.dataSource.manager;
 
     try {
       const userId = request.params.id;
@@ -30,11 +32,15 @@ async function follow(fastify: FastifyInstance) {
       request.log.error(error);
       reply.code(500).send({ message: 'Internal Server Error' });
     }
-  }
-  fastify.post('/:id/follow', {
-    schema: followSchema,
-    preValidation: [fastify.authenticate]
-  }, handler);
+  };
+  server.post(
+    '/:id/follow',
+    {
+      schema: followSchema,
+      preValidation: [server.authenticate]
+    },
+    handler
+  );
 }
 
-export default follow
+export default follow;

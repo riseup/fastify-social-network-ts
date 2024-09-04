@@ -4,10 +4,12 @@ import { EntityManager } from 'typeorm';
 import { postSchema } from './schema';
 import { User } from '../../../entity/user';
 
-async function createPost(fastify: FastifyInstance) {
-
-  const handler = async (request: FastifyRequest<{ Body: { content: string } }>, reply: FastifyReply) => {
-    const entityManager: EntityManager = fastify.dataSource.manager;
+async function createPost(server: FastifyInstance) {
+  const handler = async (
+    request: FastifyRequest<{ Body: { content: string } }>,
+    reply: FastifyReply
+  ) => {
+    const entityManager: EntityManager = server.dataSource.manager;
 
     try {
       const content = request.body.content;
@@ -16,7 +18,7 @@ async function createPost(fastify: FastifyInstance) {
       // Crear el post
       const post = entityManager.create(Post, {
         content,
-        user,
+        user
       });
 
       // Guardar el post
@@ -27,12 +29,16 @@ async function createPost(fastify: FastifyInstance) {
       request.log.error(error);
       reply.code(500).send({ message: 'Internal Server Error' });
     }
-  }
+  };
 
-  fastify.post('/', {
-    schema: postSchema,
-    preValidation: [fastify.authenticate]
-  }, handler);
+  server.post(
+    '/',
+    {
+      schema: postSchema,
+      preValidation: [server.authenticate]
+    },
+    handler
+  );
 }
 
-export default createPost
+export default createPost;

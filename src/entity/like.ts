@@ -1,4 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, CreateDateColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  CreateDateColumn
+} from 'typeorm';
 import { User } from './user';
 import { Post } from './post';
 
@@ -10,9 +15,9 @@ export class Like {
   @CreateDateColumn()
   like_date!: Date;
 
-  @ManyToOne(() => User, user => user.likes)
+  @ManyToOne(() => User, (user) => user.likes)
   user!: User;
 
-  @ManyToOne(() => Post, post => post.likes)
+  @ManyToOne(() => Post, (post) => post.likes)
   post!: Post;
 }
