@@ -109,7 +109,7 @@ Este comando levanta un contenedor PostgreSQL configurado para la aplicación.
 ### 4. Instalar Dependencias
 
 ```bash
-yarn install
+npm install
 ```
 
 ### 5. Ejecutar Migraciones y Datos Iniciales
@@ -170,4 +170,4 @@ MIT
 
 ---
 
-Desarrollado por [Tu Nombre] | 2024
+Desarrollado por Sebastian Barroso | 2024

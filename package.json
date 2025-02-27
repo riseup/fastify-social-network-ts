@@ -56,6 +56,5 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.2.0"
-  },
-  "packageManager": "yarn@4.4.1"
+  }
 }
