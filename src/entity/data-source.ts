@@ -34,3 +34,7 @@ export function getDataSourceConfig(): DataSource {
     });
   }
 }
+
+// Exportación por defecto de la instancia DataSource para CLI y migraciones
+const AppDataSource = getDataSourceConfig();
+export default AppDataSource;
