@@ -82,20 +82,17 @@ Editar `.env` con la configuración adecuada:
 
 ```env
 # Base de datos
-DB_HOST=localhost
 DB_PORT=5432
-DB_USERNAME=postgres
-DB_PASSWORD=yourpassword
-DB_DATABASE=social_network
+DB_HOST=localhost
+DB_USERNAME=test
+DB_PASSWORD=test
+DB_DATABASE=test
 
 # JWT
-JWT_SECRET=your-secure-secret-key
-JWT_EXPIRATION=1d
-JWT_REFRESH_EXPIRATION=7d
+JWT_SECRET=your-secret
 
 # Servidor
-PORT=3000
-NODE_ENV=development
+SERVER_HOST=localhost
 ```
 
 ### 3. Iniciar la Base de Datos
