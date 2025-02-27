@@ -141,10 +141,14 @@ npm start
 La documentación interactiva de la API está disponible en:
 
 ```
-http://localhost:3000/documentation
+src/static/openapi.json
 ```
+y se genera con el comando:
 
-Esta interfaz permite probar todos los endpoints directamente desde el navegador.
+```bash
+npm run openapi
+```
+Este documento se puede visualizar en la herramienta swagger editor. Esta interfaz permite probar todos los endpoints directamente desde el navegador.
 
 ## Testing
 
